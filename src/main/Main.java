@@ -10,11 +10,21 @@ import java.util.Scanner;
 public class Main extends Archivos {
     private static final String absPath = abs;
 
+    private static final String eda2 =
+                    "███████╗██████╗░░█████╗░  ██████╗░\n" +
+                    "██╔════╝██╔══██╗██╔══██╗  ╚════██╗\n" +
+                    "█████╗░░██║░░██║███████║  ░░███╔═╝\n" +
+                    "██╔══╝░░██║░░██║██╔══██║  ██╔══╝░░\n" +
+                    "███████╗██████╔╝██║░░██║  ███████╗\n" +
+                    "╚══════╝╚═════╝░╚═╝░░╚═╝  ╚══════╝";
+
     public static void main(String[] args) throws InterruptedException{
         Scanner sc = new Scanner(System.in);
         int menu, sub;
         int sleepTime = 100;
         String filename, file;
+        System.out.println();
+        System.out.println(eda2);
         System.out.println(" Proyecto 1: Ordenamiento Externo");
         filename = getFileName();
         file = absPath + filename;
@@ -25,7 +35,6 @@ public class Main extends Archivos {
         }
         do {
             System.out.println("\n Menu Ordenamientos \n");
-            System.out.println(" Hola GitHub!!!");
             System.out.println(" Archivo Actual: " + filename + "\n");
             System.out.println(" 1.- Polifase");
             System.out.println(" 2.- Mezcla Equilibrada");
