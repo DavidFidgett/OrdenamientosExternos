@@ -180,16 +180,15 @@ public class Archivos {
         }
     }
 
-    public static void printFullFile(String srcpath){
-        try {
-            Scanner sc = new Scanner(new File(srcpath));
-            while (sc.hasNext()){
-                System.out.println(sc.nextLine());
+    public static void printDependencies(){
+        for (int i = 0; i < EDA2.dependencies.length; i++) {
+            System.out.println();
+            for (int j : EDA2.dependencies[i]) {
+                char c = (char) j;
+                System.out.print(c);
             }
-            sc.close();
-        } catch (IOException e){
-            System.out.println(" Error al imprimir archivo.");
         }
+        System.out.println();
     }
 
     /**
