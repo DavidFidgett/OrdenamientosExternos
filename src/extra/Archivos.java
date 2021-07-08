@@ -180,6 +180,18 @@ public class Archivos {
         }
     }
 
+    public static void printFullFile(String srcpath){
+        try {
+            Scanner sc = new Scanner(new File(srcpath));
+            while (sc.hasNext()){
+                System.out.println(sc.nextLine());
+            }
+            sc.close();
+        } catch (IOException e){
+            System.out.println(" Error al imprimir archivo.");
+        }
+    }
+
     /**
      * Imprime los bloques de valores ordenados que se encuentran en la
      * linea de la iteracion actual en el archivo que se encuentra en la
@@ -317,6 +329,16 @@ public class Archivos {
             return thisPath.substring(0, pathEnd);
         } catch (URISyntaxException exception){
             System.out.println(" Error al obtener la direccion absoluta.");
+        }
+        return "";
+    }
+
+    public static String getThisPath(){
+        try {
+            File file = new File(Archivos.class.getProtectionDomain().getCodeSource().getLocation().toURI());
+            return file.getPath();
+        } catch (URISyntaxException e) {
+            System.out.println(" Error al obtener esta direccion.");
         }
         return "";
     }

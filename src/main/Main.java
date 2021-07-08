@@ -1,6 +1,7 @@
 package main;
 
 import extra.Archivos;
+import extra.EDA2;
 import mezclaEquilibrada.MezclaEquilibrada;
 import polifase.Polifase;
 import radix.Radix;
@@ -10,13 +11,6 @@ import java.util.Scanner;
 public class Main extends Archivos {
     private static final String absPath = abs;
 
-    private static final String eda2 =
-                    "███████╗██████╗░░█████╗░  ██████╗░\n" +
-                    "██╔════╝██╔══██╗██╔══██╗  ╚════██╗\n" +
-                    "█████╗░░██║░░██║███████║  ░░███╔═╝\n" +
-                    "██╔══╝░░██║░░██║██╔══██║  ██╔══╝░░\n" +
-                    "███████╗██████╔╝██║░░██║  ███████╗\n" +
-                    "╚══════╝╚═════╝░╚═╝░░╚═╝  ╚══════╝";
 
     public static void main(String[] args) throws InterruptedException{
         Scanner sc = new Scanner(System.in);
@@ -24,8 +18,8 @@ public class Main extends Archivos {
         int sleepTime = 100;
         String filename, file;
         System.out.println();
-        System.out.println(eda2);
-        System.out.println(" Proyecto 1: Ordenamiento Externo");
+        System.out.println(EDA2.eda2);
+        System.out.println("\n Proyecto 1: Ordenamiento Externo");
         filename = getFileName();
         file = absPath + filename;
         while (!checkFile(file)){
