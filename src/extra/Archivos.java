@@ -182,7 +182,7 @@ public class Archivos {
 
     public static void printDependencies(){
         for (int i = 0; i < EDA2.dependencies.length; i++) {
-            System.out.println();
+            System.out.print("\n\t");
             for (int j : EDA2.dependencies[i]) {
                 char c = (char) j;
                 System.out.print(c);
