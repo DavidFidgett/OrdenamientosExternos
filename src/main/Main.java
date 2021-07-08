@@ -18,10 +18,8 @@ public class Main extends Archivos {
         int sleepTime = 100;
         String filename, file;
         System.out.println();
-        printDependencies();
-        System.out.println();
         System.out.println(EDA2.eda2);
-        System.out.println("\n Proyecto 1: Ordenamiento Externo");
+        System.out.println("\n\n Proyecto 1: Ordenamiento Externo");
         filename = getFileName();
         file = absPath + filename;
         while (!checkFile(file)){
