@@ -13,8 +13,6 @@ import java.util.Scanner;
  * un ordenamiento Radix sobre estos valores en el archivo nuevo apoyandose
  * de archivos auxiliares para el almacenamiento de las claves en orden
  * de acuerdo al valor de sus digitos individuales.
- * Los archivos auxiliares y el archivo con las claves ordenadas se
- * encuentran en la carpeta "\archivosAuxiliares".
  * El formato aceptado para el archivo ingresado es de texto libre (.txt).
  * El formato que deben de tener los valores dentro de estos archivos seran
  * numeros de hasta tres digitos en el rango 1-999.
@@ -29,10 +27,6 @@ import java.util.Scanner;
  * Fecha: 07/07/2021
  */
 public class Radix extends Archivos {
-    /**
-     * String con la direccion de la carpeta donde se encuentra el archivo ordenado.
-     */
-    private static String relPath;
     /**
      * String con la direccion de la carpeta donde se encuentran los archivos auxiliares.
      */
@@ -50,6 +44,9 @@ public class Radix extends Archivos {
      */
     private static String list;
 
+    /**
+     * Cantidad maxima de digitos que pueden conformar cada valor.
+     */
     private static final int maxLength = 3;
 
     /**
@@ -63,8 +60,8 @@ public class Radix extends Archivos {
      * utilizados en el algoritmo, y el archivo final con los valores
      * ordenados lo podremos observar en la ultima linea del
      * archivo "listaRadix.txt".
-     * Este algoritmo funciona (hasta el momento) para valores con una
-     * longitud de 3 digitos (falta la implementacion para valores < 100).
+     * Este algoritmo funciona para valores con una longitud de 3
+     * digitos (Rango de valores 1-999).
      * @param srcPath Direccion del archivo con las claves a ordenar.
      */
     public static void sort(String srcPath){
@@ -131,8 +128,8 @@ public class Radix extends Archivos {
      * utilizados en el algoritmo, y el archivo final con los valores
      * ordenados lo podremos observar en la ultima linea del
      * archivo "listaRadix.txt".
-     * Este algoritmo funciona (hasta el momento) para valores con una
-     * longitud de 3 digitos (falta la implementacion para valores < 100).
+     * Este algoritmo funciona para valores con una longitud de 3
+     * digitos (Rango de valores 1-999).
      * @param srcPath Direccion del archivo con las claves a ordenar.
      */
     public static void sortDesc(String srcPath){
@@ -257,7 +254,7 @@ public class Radix extends Archivos {
      * los valores ordenados.
      */
     private static void createFiles(String srcPath){
-        relPath = abs + "radix_" + fileName(srcPath);
+        String relPath = abs + "radix_" + fileName(srcPath);
         createNewFolder(relPath);
         list = relPath + "/" + fileSorted + txt;
         auxPath = relPath + "/f";

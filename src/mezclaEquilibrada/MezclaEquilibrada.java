@@ -79,7 +79,7 @@ public class MezclaEquilibrada extends Archivos {
      * en el ordenamiento, mezclando el ultimo bloque de cada archivo auxiliar en un
      * solo bloque ordenado en el archivo f0.
      * Finalmente, en la ultima linea del archivo f0 podremos ver todos los valores
-     * ya ordenados (solo ordenamiento ascendente hasta ahora.).
+     * ya ordenados.
      * @param srcPath Direccion del archivo con las claves a ordenar.
      */
     public static void sort(String srcPath){
@@ -122,7 +122,7 @@ public class MezclaEquilibrada extends Archivos {
      * La forma en que se realiza esto es que se lee cada dato del archivo f0, y se
      * compara esta clave con el valor del numero leido previo. Si este valor leido
      * es mayor al valor anterior, significa que tanto este valor como el previo se
-     * encuentran ordenados (esto en el caso de ordenamiento ascendente) y se guardara
+     * encuentran ordenados y se guardara
      * este valor en el archivo auxiliar correspondiente. En caso de que el valor
      * actual sea menor que el valor anterior, nos indicara que este pertenece a un
      * nuevo bloque, y se guardara en el archivo auxiliar diferente al que se estaban
@@ -184,7 +184,7 @@ public class MezclaEquilibrada extends Archivos {
      * valor que se encuentre en este archivo, hasta que sea el ultimo valor
      * de dicho bloque. Una vez que se hayan leido y guardado todos los valores de
      * cualquiera de los dos bloques, se tendra entendido que el resto de los valores
-     * en el otro bloque son mayores (en el caso del ordenamiento ascendente) y se
+     * en el otro bloque son mayores y se
      * procedera a leer y guardar estos valores en el archivo f0, generando un nuevo
      * bloque ordenado del tamaño de la suma de la cantidad de elementos de los dos
      * bloques que se mezclaron.
@@ -318,6 +318,35 @@ public class MezclaEquilibrada extends Archivos {
 
     // METODOS PARA ORDENAMIENTO DESCENDIENTE
 
+    /**
+     * Realiza un ordenamiento externo por el metodo de Mezcla Equilibrada.
+     * Este ordenamiento se realiza a partir de los valores que se encuentren
+     * en el archivo con la direccion ingresada. Se realiza una copia de estos
+     * valores en el archivo f0, y se crean los archivos auxiliares f1 y f2 (en
+     * el caso de que estos no existieran previamente). Cada iteracion de este
+     * ordenamiento se guarda en una nueva linea de estos archivos mencionados.
+     * El primer paso es realizar las particiones de bloques del archivo f0 y
+     * guardar estos bloques que se encuentren ordenados en los archivos auxiliares
+     * f1 y f2, alternandose entre estos, por medio del metodo
+     * {@link #partition(int)}. Posteriormente se procedera a obtener
+     * el numero de bloques que contiene cada uno de estos archivos auxiliares, asi
+     * como el tamaño de los mismos con el metodo {@link #getBlockSize(String, int)}
+     * los cuales nos seran de utilidad en la siguiente parte del ordenamiento que
+     * consiste en mezclar los valores ya ordenados de cada bloque de los archivos
+     * auxiliares f1 y f2 en un nuevo bloque ordenado en el archivo f0. Esto se
+     * realizara a traves del metodo {@link #merge(int)}. Se agregaran los
+     * saltos de linea correspondientes para el correcto funcionamiento del
+     * ordenamiento, asi como para la visualizacion de las iteraciones en cada
+     * uno de los archivos.
+     * Este procedimiento se realizara hasta que en la ultima mezcla realizada, la
+     * cantidad de bloques tanto del archivo auxiliar f1 como del archivo auxiliar
+     * f2 sea de 1, lo cual nos indicara que ya se realizo la ultima mezcla posible
+     * en el ordenamiento, mezclando el ultimo bloque de cada archivo auxiliar en un
+     * solo bloque ordenado en el archivo f0.
+     * Finalmente, en la ultima linea del archivo f0 podremos ver todos los valores
+     * ya ordenados.
+     * @param srcPath Direccion del archivo con las claves a ordenar.
+     */
     public static void sortDesc(String srcPath){
         createFiles(srcPath);
         clearAllFiles();
@@ -351,6 +380,31 @@ public class MezclaEquilibrada extends Archivos {
         trimAuxFiles();
     }
 
+    /**
+     * Este metodo realiza las particiones del archivo f0, guardando los
+     * bloques que ya se encuentren ordenados en este archivo en los archivos
+     * auxiliares f1 y f2, alternando entre estos dos cada bloque ordenado leido.
+     * La forma en que se realiza esto es que se lee cada dato del archivo f0, y se
+     * compara esta clave con el valor del numero leido previo. Si este valor leido
+     * es menor al valor anterior, significa que tanto este valor como el previo se
+     * encuentran ordenados y se guardara
+     * este valor en el archivo auxiliar correspondiente. En caso de que el valor
+     * actual sea mayor que el valor anterior, nos indicara que este pertenece a un
+     * nuevo bloque, y se guardara en el archivo auxiliar diferente al que se estaban
+     * guardando los datos, y procedera a guardar los demas valores leidos que se
+     * encuentren ordenados en este archivo auxiliar diferente al anterior.
+     * La forma en como se implemento fue a traves de un contador. Cada vez que se
+     * detectara un nuevo bloque, el contador aumentaba. Si este contador es un numero
+     * par, las claves se almacenaran en el archivo auxiliar f1. Caso contrario que el
+     * contador sea un numero non, los valores se guardaran en el archivo auxiliar
+     * f2, logrando de esta manera poder alternar el almacenamiento de bloques entre
+     * ambos archivos auxiliares.
+     * Al igual que en la mayoria de los metodos utilizados en estos ordenamientos
+     * externos, es importante conocer el numero de la iteracion que se esta
+     * realizando para saber cuantas lineas de los archivos deben ser ignoradas
+     * para la correcta lectura y ordenamiento de los valores.
+     * @param iteration Numero de la iteracion que se realiza en el sort.
+     */
     private static void partitionDesc(int iteration){
         try {
             Scanner sF0 = new Scanner(new File(f0));
@@ -381,6 +435,35 @@ public class MezclaEquilibrada extends Archivos {
         }
     }
 
+    /**
+     * Metodo merge basado en la version utilizada con arreglos.
+     * Este metodo realiza un merge entre los bloques de valores ya ordenados
+     * que se encuentran en los archivos auxiliares f1 y f2, guardando estos
+     * valores en el archivo f0 mientras estos estan siendo leidos de dichos
+     * archivos auxiliares.
+     * Apoyandose de los queues que contienen el tamaño de los bloques ordenados
+     * de cada uno de los archivos auxiliares, se hara un ordenamiento merge de
+     * los valores en estos bloques. Se leera el primer valor que contiene cada uno
+     * de los bloques auxiliares, y se compararan entre ellos. El valor que sea el
+     * mayor de estos dos sera guardado en el archivo f0, y se leera el siguiente
+     * valor que se encuentre en este archivo, hasta que sea el ultimo valor
+     * de dicho bloque. Una vez que se hayan leido y guardado todos los valores de
+     * cualquiera de los dos bloques, se tendra entendido que el resto de los valores
+     * en el otro bloque son menores y se
+     * procedera a leer y guardar estos valores en el archivo f0, generando un nuevo
+     * bloque ordenado del tamaño de la suma de la cantidad de elementos de los dos
+     * bloques que se mezclaron.
+     * Una vez leidos todos los bloques de un archivo auxiliar, puede ocurrir el
+     * caso de que uno de los dos archivos auxiliares tenga un bloque mas de valores
+     * ordenados que el otro archivo. En esta situacion, terminada la mezcla de todos
+     * los demas bloques, el bloque restante pasara a ser copiado en su totalidad
+     * al archivo f0.
+     * Al igual que en la mayoria de los metodos utilizados en estos ordenamientos
+     * externos, es importante conocer el numero de la iteracion que se esta
+     * realizando para saber cuantas lineas de los archivos deben ser ignoradas
+     * para la correcta lectura y ordenamiento de los valores.
+     * @param iteration Numero de la iteracion que se realiza en el sort.
+     */
     private static void mergeDes(int iteration){
         try {
             Scanner sF1 = new Scanner(new File(f1));
@@ -447,6 +530,29 @@ public class MezclaEquilibrada extends Archivos {
         }
     }
 
+    /**
+     * Dado un archivo con direccion f, este metodo generara y
+     * retornara un Queue el cual guardara el tamaño de cada uno de los
+     * bloques ordenados que contiene el archivo. La utilidad de este queue
+     * es poder saber el numero de datos a leer durante el proceso de mezcla
+     * para que durante la mezcla de los bloques de los archivos auxiliares
+     * solo se lean los datos correspondientes a cada bloque, sin que se lea
+     * algun valor adicional de dicho bloque, lo cual podria generar que algun
+     * valor no sea agregado en el orden establecido, dandonos como resultado
+     * una serie de datos no ordenados. Este metodo leera la cantidad de valores
+     * que se encuentren en el archivo, guardando esta cantidad en un contador, hasta
+     * que se detecte que el valor leido es mayor al valor anterior, lo cual
+     * representaria que inicio un nuevo bloque. Cuando esto ocurre, agregamos al
+     * queue este contador que contendra el la cantidad de valores en el bloque, lo
+     * cual correspondera al tamaño del mismo. El contador se reiniciara a 0 y se
+     * procedera a obtener el tamaño del siguiente bloque.
+     * Es importante conocer el numero de iteracion que se esta realizando en el
+     * ordenamiento, para saber cuantas lineas deben de omitirse en la lectura
+     * del archivo auxiliar.
+     * @param f String con la direccion del archivo.
+     * @param iteration Numero de la iteracion que se realiza en el sort.
+     * @return Queue con los valores que representan el tamaño de cada bloque.
+     */
     private static Queue<Integer> getBlockSizeDesc(String f, int iteration){
         Queue<Integer> blocks = new LinkedList<>();
         try {
