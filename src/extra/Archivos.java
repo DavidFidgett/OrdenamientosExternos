@@ -180,17 +180,6 @@ public class Archivos {
         }
     }
 
-    public static void printDependencies(){
-        for (int i = 0; i < EDA2.dependencies.length; i++) {
-            System.out.print("\n\t");
-            for (int j : EDA2.dependencies[i]) {
-                char c = (char) j;
-                System.out.print(c);
-            }
-        }
-        System.out.println();
-    }
-
     /**
      * Imprime los bloques de valores ordenados que se encuentran en la
      * linea de la iteracion actual en el archivo que se encuentra en la
@@ -328,16 +317,6 @@ public class Archivos {
             return thisPath.substring(0, pathEnd);
         } catch (URISyntaxException exception){
             System.out.println(" Error al obtener la direccion absoluta.");
-        }
-        return "";
-    }
-
-    public static String getThisPath(){
-        try {
-            File file = new File(Archivos.class.getProtectionDomain().getCodeSource().getLocation().toURI());
-            return file.getPath();
-        } catch (URISyntaxException e) {
-            System.out.println(" Error al obtener esta direccion.");
         }
         return "";
     }

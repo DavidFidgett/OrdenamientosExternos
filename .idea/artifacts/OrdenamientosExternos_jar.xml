@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
   <artifact type="jar" name="OrdenamientosExternos:jar">
-    <output-path>$PROJECT_DIR$/../../../../Desktop/OrdExt</output-path>
+    <output-path>$PROJECT_DIR$/../../../../Desktop/ProyectoEDA2</output-path>
     <root id="archive" name="OrdenamientosExternos.jar">
       <element id="module-output" name="OrdenamientosExternos" />
     </root>

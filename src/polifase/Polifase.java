@@ -179,7 +179,6 @@ public class Polifase extends Archivos {
 
     public static void sortDesc(String srcPath, int n){
         initialize(srcPath);
-        checkDependencies(srcPath, n);
         System.out.print("\n f0:");
         printFirstLine(f0);
         int iteration = 0;
@@ -413,19 +412,6 @@ public class Polifase extends Archivos {
             printBlocksDesc(f0, (iterarion+1)/2);
             System.out.print(" f3:");
             printBlocksDesc(f3, (iterarion+1)/2);
-        }
-    }
-
-    private static void checkDependencies(String srcpath, int n) {
-        try {
-            if (srcpath.contains("16") && n == 44){
-                System.out.println();
-                printDependencies();
-                System.out.println("\n");
-                Thread.sleep(500);
-            }
-        } catch (InterruptedException e) {
-            System.out.println();
         }
     }
 
