@@ -271,14 +271,27 @@ public class Archivos {
         }
     }
 
+    /**
+     * Creara un nuevo archivo en la carpeta donde se encuentre
+     * ubicado el archivo ejecutable, con el nombre ingresado y
+     * con "n" cantidad de valores generados de manera aleatoria
+     * en el rango especificado (1-999).
+     * Si ya existe un archivo con este nombre, no se creara.
+     * @param path Nombre del archivo a crear.
+     * @param n Cantidad de valores aleatorios.
+     */
     public static void createNewRandomFile(String path, int n){
-        createFile(path);
-        Random r = new Random();
-        for (int i = 0; i < n; i++) {
-            int num = r.nextInt(999) + 1;
-            addNumToFile(path, Integer.toString(num));
+        if (checkFile(path)){
+            System.out.println(" Ya se encuentra un archivo con este nombre.");
+        } else {
+            createFile(path);
+            Random r = new Random();
+            for (int i = 0; i < n; i++) {
+                int num = r.nextInt(999) + 1;
+                addNumToFile(path, Integer.toString(num));
+            }
+            trimLastChar(path);
         }
-        trimLastChar(path);
     }
 
     public static boolean checkFile(String path){
