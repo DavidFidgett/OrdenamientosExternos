@@ -2,7 +2,10 @@ package extra;
 
 import java.io.*;
 import java.net.URISyntaxException;
+import java.net.URL;
 import java.nio.channels.FileChannel;
+import java.security.CodeSource;
+import java.security.ProtectionDomain;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -11,10 +14,15 @@ import java.util.Scanner;
  * la lectura, escritura, creacion, entre otros, de archivos.
  *
  * @author David Gutierrez Marin
- * @version 2.2
+ * @version 3.0
  */
 public class Archivos {
 
+    /**
+     * String con la direccion absoluta del ejecutable obtenida con
+     * {@link #getAbsolutePath()} para el facil acceso a esta, tomando
+     * en cuenta que las demas clases son sub-clases de esta misma.
+     */
     public static final String abs = getAbsolutePath();
 
     /**
@@ -294,11 +302,44 @@ public class Archivos {
         }
     }
 
+    /**
+     * Verifica si el archivo en la direccion ingresada existe o no.
+     * @param path Direccion del archivo a comprobar.
+     * @return True si el archivo ya existe, False si no existe dicho archivo.
+     */
     public static boolean checkFile(String path){
         File file = new File(path);
         return file.exists();
     }
 
+    /**
+     * FUNCION DE SUMA IMPORTANCIA PARA LA ADECUADA EJECUCION DEL PROGRAMA
+     * UNA VEZ QUE SE ENCUENTRE EN FORMATO .JAR
+     * Esta funcion creara un tipo de dato "File" utilizando como parametro
+     * principal la direccion de esta misma clase.
+     * A partir de la clase de este archivo, con
+     * {@link Class#getProtectionDomain()} obtenemos el dominio protegido de
+     * esta clase, para posteriormente con
+     * {@link ProtectionDomain#getCodeSource()} obtener el codigo fuente, a
+     * partir del cual obtendremos un URL con su ubicacion utilizando el
+     * metodo {@link CodeSource#getLocation()}. Una vez que tengamos esta
+     * URL, utilizamos el metodo {@link URL#toURI()} para darle un formato
+     * apropiado a la URL que pueda generar problemas, tales como un caracter
+     * que no sea valido, o  algun espacio, para finalmente utilizar el metodo
+     * {@link File#getPath()} para obtener un String que contendra la direccion
+     * absoluta dentro de la computadora donde se encuentre el archivo
+     * ejecutable que estemos utilizando.
+     * Con esta direccion podremos siempre saber la ubicacion de la carpeta que
+     * contiene al archivo ejecutable .jar (substrayendo el nombre de este archivo
+     * al String con la direccion absoluta) para poder tanto leer los archivos que
+     * se encuentren en esta ubicacion, asi como para poder crear las carpetas y
+     * los archivos que son fundamentales para la ejecucion del programa.
+     * Esta ubicacion sera donde se crearan todos los archivos que genere el
+     * programa, y tambien es la direccion donde se tienen que encontrar los
+     * archivos con claves que se desean ordenar.
+     * @author David Gutierrez Marin
+     * @return Direccion absoluta donde se encuentra el archivo ejecutable .jar.
+     */
     public static String getAbsolutePath() {
         try {
             File file = new File(Archivos.class.getProtectionDomain().getCodeSource().getLocation().toURI());

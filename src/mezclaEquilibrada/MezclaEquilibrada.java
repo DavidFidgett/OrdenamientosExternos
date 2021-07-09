@@ -14,8 +14,6 @@ import java.util.Scanner;
  * archivo con los valores del archivo existente, y realiza un ordenamiento
  * de Mezcla Equilibrada sobre estos valores apoyandose del uso de archivos
  * auxiliares.
- * Los archivos auxiliares y el archivo donde se guardan los datos ya ordenados
- * se encuentran en la carpeta "\archivosAuxiliares".
  * El formato aceptado para el archivo ingresado es de texto libre (.txt).
  * El formato que deberan tener los valores en estos archivos seran numeros los
  * cuales deberan de estar separados con comas "," y sin espacios entre estos
@@ -24,15 +22,10 @@ import java.util.Scanner;
  * linea tanto de los archivos auxiliares como del archivo que contiene las claves
  * iniciales a ordenar.
  *
- * @author David Gutierrez Marin
- * @version 1.2
+ * @author aaaa
+ * @version 1.4
  */
 public class MezclaEquilibrada extends Archivos {
-    /**
-     * String con la direccion de la carpeta donde se encuentran los archivos utilizados
-     * para la implementacion del ordenamiento por Mezcla Equilibrada.
-     */
-    private static String relPath;
     /**
      * String con la terminacion del tipo de archivo (.txt) que se trabajara.
      */
@@ -495,7 +488,7 @@ public class MezclaEquilibrada extends Archivos {
      * se encuentren ordenados.
      */
     private static void createFiles(String srcPath){
-        relPath = abs + "mezeq_" +fileName(srcPath);
+        String relPath = abs + "mezeq_" + fileName(srcPath);
         createNewFolder(relPath);
         f0 = relPath + "/f0" + txt;
         f1 = relPath + "/f1" + txt;
