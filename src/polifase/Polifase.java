@@ -419,11 +419,11 @@ public class Polifase extends Archivos {
         if (iteration % 2 == 0){
             System.out.println(" Sorted in f1.");
             System.out.print(" f1:");
-            printSortedLine(f1, iteration/2);
+            printLine(f1, iteration/2);
         } else {
             System.out.println(" Sorted in f0.");
             System.out.print(" f0");
-            printSortedLine(f0, (iteration+1)/2);
+            printLine(f0, (iteration+1)/2);
         }
     }
 

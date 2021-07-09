@@ -248,28 +248,6 @@ public class Archivos {
         }
     }
 
-    public static void printSortedLine(String pathname, int iteration){
-        try {
-            Scanner sc = new Scanner(new File(pathname));
-            sc.useDelimiter(",");
-            for (int i = 0; i < iteration; i++) {
-                sc.nextLine();
-            }
-            System.out.print(" {");
-            while (sc.hasNext()){
-                System.out.print(sc.next());
-                if (sc.hasNext()){
-                    Thread.sleep(0);
-                    System.out.print(",");
-                }
-            }
-            System.out.println("}");
-            sc.close();
-        } catch (IOException | InterruptedException e){
-            System.out.println(" Error al imprimir valores ordenados.");
-        }
-    }
-
     /**
      * Regresa el nombre del archivo ubicado en la direccion
      * ingresada, sin la terminacion ".txt".

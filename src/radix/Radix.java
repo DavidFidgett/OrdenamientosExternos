@@ -113,7 +113,7 @@ public class Radix extends Archivos {
             trimAuxFiles();
             System.out.println("\n Archivo ordenado: ");
             System.out.print("\n list:");
-            printSortedLine(list, iter);
+            printLine(list, iter);
         } catch (IOException e){
             System.out.println(" Error en el ordenamiento.");
         }
@@ -239,7 +239,7 @@ public class Radix extends Archivos {
             trimAuxFiles();
             System.out.println("\n Archivo ordenado: ");
             System.out.print("\n list:");
-            printSortedLine(list, iter);
+            printLine(list, iter);
         } catch (IOException e){
             System.out.println(" Error en el ordenamiento.");
         }

@@ -118,7 +118,7 @@ public class MezclaEquilibrada extends Archivos {
         } while (f1Partitions != 1 || f2Partitions != 1);
         System.out.println("\n FINAL");
         System.out.print(" f0:");
-        printSortedLine(f0, i);
+        printLine(f0, i);
         trimAuxFiles();
     }
 
@@ -354,7 +354,7 @@ public class MezclaEquilibrada extends Archivos {
         } while (f1Partitions != 1 || f2Partitions != 1);
         System.out.println("\n FINAL");
         System.out.print(" f0:");
-        printSortedLine(f0, i);
+        printLine(f0, i);
         trimAuxFiles();
     }
 
