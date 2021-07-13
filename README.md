@@ -10,7 +10,7 @@ Si se desea conocer la version con la que se cuenta, escribir y
 ejecutar el siguiente comando en el Simbolo de Sistema o en la
 Terminal, dependiendo del sistema operativo que se este utilizando:
 
-java -version
+`java -version`
 
 Para correr el programa .jar:
 
@@ -36,7 +36,7 @@ En Windows:
  Una vez que se encuentra en esta ubicacion, escribir en la
  linea de comandos lo siguiente para ejecutar el programa:
 
- java -jar OrdenamientosExternos.jar
+ `java -jar OrdenamientosExternos.jar`
 
 En Linux:
  Opcion 1:
@@ -56,7 +56,7 @@ En Linux:
  Una vez que nos encontremos en la ubicacion deseada, escribimos el
  siguiene comando en la terminal y lo ejecutamos:
 
- java -jar OrdenamientosExternos.jar
+ `java -jar OrdenamientosExternos.jar`
 
 ////**** EJECUCION DEL PROGRAMA ****////
 
